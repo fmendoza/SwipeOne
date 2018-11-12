@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>About</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <h2>Get In Touch With Us</h2>
+  <p>
+    We love hearing from readers, hackers and makers from the community. We really appreciate you taking the time to get in touch. Please fill in the form below.
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Message</ion-label>
+      <ion-textarea rows="4" formControlName="text" placeholder="Write something here..."></ion-textarea>
+    </ion-item>
+    <div text-center margin-top>
+      <ion-button type="submit" shape="round" color="secondary" [disabled]="submitted">
+        Submit
+      </ion-button>
+    </div>
+  </form>
+
+</ion-content>

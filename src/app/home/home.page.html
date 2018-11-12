@@ -1,0 +1,65 @@
+<ion-header no-border>
+  <ion-toolbar color="primary" fixed>
+    <ion-title>
+      {{ selectedButton?.title }}
+    </ion-title>
+    <ion-buttons slot="end">
+        <p class="bold text-small">Dark Mode</p>
+        <ion-toggle mode="md" color="dark" (ionChange)="onChangeToggle($event)"></ion-toggle>
+        <ion-button href="/about">
+          <ion-icon slot="icon-only" name="help"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary" fixed>
+    <ion-row>
+      <ion-col *ngFor="let button of buttons">
+        <ion-button class="toolbar-button" fill="clear" expand="block" size="small" color="light" [class.selected]="button.selected" [ngClass]="button.id"
+          (click)="onButtonTouched(button)">
+          <ion-icon slot="icon-only"
+            [name]="button.icon"
+            [src]="button.icon">
+          </ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid fixed>
+
+    <ion-refresher slot="fixed" (ionRefresh)="loadPosts($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-row class="full-height" *ngIf="isNetworkError" align-items-center>
+      <ion-col text-center>
+        <ion-icon class="icon-alert" name="alert"></ion-icon>
+        <p>Network error</p>
+      </ion-col>
+      
+    </ion-row>
+
+    <ion-slides *ngIf="!isNetworkError" [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()">
+      <ion-slide *ngFor="let slide of slidesPost">
+
+        <ion-list lines="full" *ngIf="isLoading">
+          <div padding-horizontal class="fakeItem" *ngFor="let i of fakeArray">
+            <h2></h2>
+            <h3></h3>
+          </div> 
+        </ion-list>
+
+        <ion-list lines="full" *ngIf="isSlideActive(slide) && !isLoading">
+          <ion-item *ngFor="let post of slide.posts" (click)="openUrl(post.url)">
+            <ion-label text-wrap><p class="bold">{{ post.title }}</p></ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-slide>
+    </ion-slides>
+  </ion-grid>
+
+</ion-content>

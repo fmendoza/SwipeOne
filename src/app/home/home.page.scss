@@ -1,0 +1,63 @@
+.toolbar-button {
+
+    ion-icon {
+        color: white !important;
+        opacity: .1 !important;
+    }
+
+    &.selected {
+        --opacity: 1;
+
+        ion-icon {
+            opacity: 1 !important;
+        }
+    }
+}
+
+.title-ios {
+    text-align: left !important;
+    padding-left: 16px !important;
+}
+
+ion-list {
+    width: 100%;
+}
+
+ion-toggle {
+    pointer-events: all;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.text-small {
+    font-size: 12px;
+}
+
+.text-medium {
+    font-size: 14px;
+}
+
+.icon-alert {
+    font-size: 36px;
+}
+
+.fakeItem {
+
+    h2,
+    h3 {
+        background-color: lightgrey;
+        opacity: 0.5;
+        height: 1em;
+        margin-top: 10px;
+    }
+
+    h2 {
+        width: 100%;
+    }
+
+    h3 {
+        width: 80%;
+    }
+}

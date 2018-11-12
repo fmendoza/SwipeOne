@@ -1,0 +1,27 @@
+// http://ionicframework.com/docs/theming/
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.bold {
+    font-weight: bold;
+}
+
+ion-header ion-toolbar {
+    margin: auto;
+}
+
+@media (min-width: 760px) {
+    ion-header ion-toolbar[fixed] {
+        margin: 0;
+        --padding-end: calc((100% - var(--ion-grid-width-xl)) / 2);
+        --padding-start: calc((100% - var(--ion-grid-width-xl)) / 2);
+    }
+}
