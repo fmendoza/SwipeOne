@@ -28,8 +28,8 @@ export class ThemeService {
   getDarkTheme() {
     return `
       ${this.currentTheme}
-      --ion-background-color: #293145;
-      --ion-item-background-color: #293145;
+      --ion-background-color: #171717;
+      --ion-item-background-color: #171717;
       --ion-text-color: #fff;
       --ion-text-color-step-400: #fff;
       --ion-text-color-step-600: #fff;
