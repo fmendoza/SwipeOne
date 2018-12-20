@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Slides, Platform, Content } from '@ionic/angular';
+import { Platform, IonSlides, IonContent } from '@ionic/angular';
 import { ThemeService } from '../theme.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BrowserTab } from '@ionic-native/browser-tab/ngx';
@@ -26,8 +26,8 @@ interface SlidePost {
 
 export class HomePage {
 
-  @ViewChild(Slides) slides: Slides
-  @ViewChild(Content) content: Content
+  @ViewChild(IonSlides) slides: IonSlides
+  @ViewChild(IonContent) content: IonContent
 
   buttons: ToolbarButton[] = []
   selectedButton: ToolbarButton
