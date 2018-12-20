@@ -31,6 +31,7 @@
                 "input": "node_modules/@ionic/angular/dist/ionic/svg",
                 "output": "./svg"
               },
+              "src/manifest.json",
               "src/manifest.json"
             ],
             "styles": [
@@ -59,8 +60,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "serviceWorker": false
+              "buildOptimizer": true
             }
           }
         },
