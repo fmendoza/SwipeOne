@@ -13,8 +13,8 @@
   </ion-toolbar>
   <ion-toolbar color="primary" fixed>
     <ion-row>
-      <ion-col *ngFor="let button of buttons">
-        <ion-button class="toolbar-button" fill="clear" expand="block" size="small" color="light" [class.selected]="button.selected" [ngClass]="button.id"
+      <ion-col *ngFor="let button of buttons" text-center>
+        <ion-button class="toolbar-button" fill="clear" size="small" color="light" [class.selected]="button.selected" [ngClass]="button.id"
           (click)="onButtonTouched(button)">
           <ion-icon slot="icon-only"
             [name]="button.icon"
@@ -54,7 +54,9 @@
 
         <ion-list lines="full" *ngIf="isSlideActive(slide) && !isLoading">
           <ion-item *ngFor="let post of slide.posts" (click)="openUrl(post.url)">
-            <ion-label text-wrap><p class="bold">{{ post.title }}</p></ion-label>
+            <ion-label text-wrap>
+              <p class="bold link">{{ post.title }}</p>
+            </ion-label>
           </ion-item>
         </ion-list>
 

@@ -38,7 +38,8 @@ export class HomePage {
   isLoading: boolean
   slideOpts = {
     autoHeight: false,
-    autoplay: false
+    autoplay: false,
+    touchStartPreventDefault: false,
   }
 
   constructor(private platform: Platform,
@@ -203,7 +204,7 @@ export class HomePage {
         }
 
       } else {
-        this.inAppBrowser.create(url, '_system')
+        this.inAppBrowser.create(url, '_blank')
       }
       
     } catch (error) {

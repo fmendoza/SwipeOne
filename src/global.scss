@@ -25,3 +25,8 @@ ion-header ion-toolbar {
         --padding-start: calc((100% - var(--ion-grid-width-xl)) / 2);
     }
 }
+
+.plt-desktop .link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
