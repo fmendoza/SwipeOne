@@ -1,0 +1,6 @@
+{
+  "appId": "com.quanlabs.swipeone",
+  "appName": "SwipeOne",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
