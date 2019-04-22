@@ -1,5 +1,5 @@
 import { Component, ViewChild, HostListener } from '@angular/core';
-import { Platform, IonSlides, IonContent, ModalController } from '@ionic/angular';
+import { Platform, IonSlides, IonContent, ToastController } from '@ionic/angular';
 import { ThemeService } from '../theme.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BrowserTab } from '@ionic-native/browser-tab/ngx';
@@ -38,7 +38,7 @@ export class HomePage {
   @HostListener('window:keyup', ['$event']) keyEvent(event: KeyboardEvent) {
 
     if (!this.slides) return;
-    
+
     if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
       this.slides.slideNext()
     }
@@ -48,15 +48,15 @@ export class HomePage {
     }
   }
 
-  buttons: ToolbarButton[] = []
-  selectedButton: ToolbarButton
-  slidesPost: SlidePost[] = []
-  posts: Post[] = []
-  fakeArray: number[] = []
-  isNetworkError: boolean = false
-  isLoading: boolean
-  
-  slideOpts = {
+  public buttons: ToolbarButton[] = []
+  public selectedButton: ToolbarButton
+  public slidesPost: SlidePost[] = []
+  public posts: Post[] = []
+  public fakeArray: number[] = []
+  public isNetworkError: boolean = false
+  public isLoading: boolean
+
+  public slideOpts = {
     autoHeight: false,
     autoplay: false,
     touchStartPreventDefault: false,
@@ -92,11 +92,11 @@ export class HomePage {
     private browserTab: BrowserTab,
     private postService: Post,
     private socialSharing: SocialSharing,
-    private modalCtrl: ModalController,
-    private themeService: ThemeService) {}
+    private toastCtrl: ToastController,
+    private themeService: ThemeService) { }
 
   ngOnInit() {
-    
+
     this.createButtons()
     this.createSlides()
     this.createFakeArray()
@@ -133,7 +133,7 @@ export class HomePage {
       this.isNetworkError = false
 
       this.onRefreshComplete(refresher)
-      
+
     } catch (error) {
       this.isNetworkError = true
       this.onRefreshComplete(refresher)
@@ -141,7 +141,31 @@ export class HomePage {
 
   }
 
-  async onShare (post: Post) {
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    })
+    toast.present()
+  }
+
+  onCopyButtonTouched(post: Post) {
+
+    const textarea = document.createElement('textarea')
+    textarea.style.position = 'fixed'
+    textarea.style.left = '0'
+    textarea.style.top = '0'
+    textarea.style.opacity = '0'
+    textarea.value = post.url
+    document.body.appendChild(textarea)
+    textarea.focus()
+    textarea.select()
+    document.execCommand('copy')
+    document.body.removeChild(textarea)
+    this.presentToast('Link copied to clipboard')
+  }
+
+  async onShare(post: Post) {
 
     this.webSocialShare.share.config.forEach((item: any) => {
       if (item.whatsapp) {
@@ -163,11 +187,11 @@ export class HomePage {
       } catch (err) {
         console.warn(err)
       }
-      
+
     } else {
       this.webSocialShare.show = true;
     }
-   
+
   }
 
   onChangeToggle(ev: CustomEvent) {
@@ -208,7 +232,7 @@ export class HomePage {
   }
 
   createButtons() {
-    
+
     this.buttons.push({
       id: 'producthunt',
       title: 'Product Hunt',
@@ -269,12 +293,12 @@ export class HomePage {
     if (this.slides) this.slides.slideTo(index)
   }
 
-  async openUrl (url: string) {
+  async openUrl(url: string) {
 
     try {
 
       if (this.platform.is('cordova')) {
-        
+
         const isAvailable = await this.browserTab.isAvailable()
 
         if (isAvailable) {
@@ -286,12 +310,12 @@ export class HomePage {
       } else {
         this.inAppBrowser.create(url, '_blank')
       }
-      
+
     } catch (error) {
       console.warn(error)
     }
 
   }
 
-  
+
 }

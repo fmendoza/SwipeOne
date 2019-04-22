@@ -74,6 +74,10 @@
                 <ion-icon name="share" slot="start"></ion-icon>
                 <span>Share</span>
               </ion-button>
+              <ion-button fill="clear" size="small" text-lowercase
+                (click)="onCopyButtonTouched(post); $event.stopPropagation()">
+                <span>Copy link</span>
+              </ion-button>
             </ion-label>
           </ion-item>
         </ion-list>
