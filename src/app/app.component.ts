@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, Config } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from '../environments/environment' 
@@ -21,6 +21,8 @@ export class AppComponent {
     Parse.initialize(environment.appId);
     (Parse as any).serverURL = environment.serverUrl;
 
+    this.setupDesktopAnimations();
+
     await this.platform.ready();
 
     if (this.platform.is('android')) {
@@ -30,5 +32,13 @@ export class AppComponent {
     }
 
     this.splashScreen.hide();
+  }
+
+  setupDesktopAnimations() {
+    if (this.platform.is('desktop')) {
+      const config = new Config;
+      config.set('rippleEffect', false);
+      config.set('animated', true);
+    }
   }
 }

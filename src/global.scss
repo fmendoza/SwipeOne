@@ -26,6 +26,19 @@ ion-header ion-toolbar {
     }
 }
 
+.flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.custom-link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .plt-desktop .link:hover {
     cursor: pointer;
     text-decoration: underline;

@@ -30,6 +30,7 @@ export class ThemeService {
       ${this.currentTheme}
       --ion-background-color: #171717;
       --ion-item-background-color: #171717;
+      --ion-border-color: #444;
       --ion-text-color: #fff;
       --ion-text-color-step-400: #fff;
       --ion-text-color-step-600: #fff;
@@ -41,6 +42,7 @@ export class ThemeService {
       ${this.currentTheme}
       --ion-background-color: #fff;
       --ion-item-background-color: #fff;
+      --ion-border-color: #d8d8d8;
       --ion-text-color: #222;
       --ion-text-color-step-400: #222;
       --ion-text-color-step-600: #222;

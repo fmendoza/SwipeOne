@@ -31,6 +31,16 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
+              {
+                "glob": "websocialshare.js",
+                "input": "node_modules/web-social-share/dist",
+                "output": "./"
+              },
+              {
+                "glob": "websocialshare/*",
+                "input": "node_modules/web-social-share/dist",
+                "output": "./"
+              },
               "src/manifest.json",
               "src/_redirects"
             ],

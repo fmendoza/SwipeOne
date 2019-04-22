@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { Platform, IonSlides, IonContent } from '@ionic/angular';
+import { Component, ViewChild, HostListener } from '@angular/core';
+import { Platform, IonSlides, IonContent, ModalController } from '@ionic/angular';
 import { ThemeService } from '../theme.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BrowserTab } from '@ionic-native/browser-tab/ngx';
 import { Post } from '../post.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 interface ToolbarButton {
   id: string,
@@ -18,6 +19,11 @@ interface SlidePost {
   posts: Post[]
 }
 
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -29,6 +35,19 @@ export class HomePage {
   @ViewChild(IonSlides) slides: IonSlides
   @ViewChild(IonContent) content: IonContent
 
+  @HostListener('window:keyup', ['$event']) keyEvent(event: KeyboardEvent) {
+
+    if (!this.slides) return;
+    
+    if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+      this.slides.slideNext()
+    }
+
+    if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+      this.slides.slidePrev()
+    }
+  }
+
   buttons: ToolbarButton[] = []
   selectedButton: ToolbarButton
   slidesPost: SlidePost[] = []
@@ -36,16 +55,44 @@ export class HomePage {
   fakeArray: number[] = []
   isNetworkError: boolean = false
   isLoading: boolean
+  
   slideOpts = {
     autoHeight: false,
     autoplay: false,
     touchStartPreventDefault: false,
   }
 
+  public webSocialShare: { show: boolean, share: any, onClosed: any } = {
+    show: false,
+    share: {
+      config: [{
+        facebook: {
+          socialShareUrl: '',
+          socialShareText: 'via https://swipeone.app'
+        },
+      }, {
+        twitter: {
+          socialShareUrl: '',
+          socialShareText: 'via https://swipeone.app'
+        }
+      }, {
+        whatsapp: {
+          socialShareUrl: '',
+          socialShareText: 'via https://swipeone.app'
+        }
+      }]
+    },
+    onClosed: () => {
+      this.webSocialShare.show = false;
+    }
+  };
+
   constructor(private platform: Platform,
     private inAppBrowser: InAppBrowser,
     private browserTab: BrowserTab,
     private postService: Post,
+    private socialSharing: SocialSharing,
+    private modalCtrl: ModalController,
     private themeService: ThemeService) {}
 
   ngOnInit() {
@@ -58,6 +105,10 @@ export class HomePage {
     this.themeService.setPrimaryColor(button.color)
 
     this.loadPosts()
+  }
+
+  sleep(ms: number): Promise<any> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async loadPosts(refresher = null) {
@@ -88,6 +139,32 @@ export class HomePage {
       this.onRefreshComplete(refresher)
     }
 
+  }
+
+  async onShare (post: Post) {
+
+    this.webSocialShare.share.config.forEach((item: any) => {
+      if (item.whatsapp) {
+        item.whatsapp.socialShareUrl = post.url;
+      } else if (item.facebook) {
+        item.facebook.socialShareUrl = post.url;
+      } else if (item.twitter) {
+        item.twitter.socialShareUrl = post.url;
+      }
+    });
+
+    if (this.platform.is('hybrid')) {
+
+      try {
+        await this.socialSharing.share(post.title, null, null, post.url);
+      } catch (err) {
+        console.warn(err)
+      }
+      
+    } else {
+      this.webSocialShare.show = true;
+    }
+   
   }
 
   onChangeToggle(ev: CustomEvent) {

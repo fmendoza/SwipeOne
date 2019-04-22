@@ -1,6 +1,7 @@
 :root {
 
   --ion-background-color: #fff;
+  --ion-border-color: #d8d8d8;
   --ion-text-color-step-400: #222;
   --ion-text-color-step-600: #222;
 
@@ -75,6 +76,33 @@
   --ion-color-light-contrast-rgb: 0,0,0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  .ion-color-fb {
+    --ion-color-base: #3b5999;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #3b5999;
+    --ion-color-tint: #3b5999;
+  }
+
+  .ion-color-twitter {
+    --ion-color-base: #55acee;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #55acee;
+    --ion-color-tint: #55acee;
+  }
+
+  .ion-color-whatsapp {
+    --ion-color-base: #25D366;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #25D366;
+    --ion-color-tint: #25D366;
+  }
 
   ion-toast {
     --color: #ffffff;

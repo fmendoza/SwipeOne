@@ -4,21 +4,19 @@
       {{ selectedButton?.title }}
     </ion-title>
     <ion-buttons slot="end">
-        <p class="bold text-small">Dark Mode</p>
-        <ion-toggle mode="md" color="dark" (ionChange)="onChangeToggle($event)"></ion-toggle>
-        <ion-button routerLink="/about">
-          <ion-icon slot="icon-only" name="help"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+      <p class="bold text-small">Dark Mode</p>
+      <ion-toggle mode="md" color="dark" (ionChange)="onChangeToggle($event)"></ion-toggle>
+      <ion-button routerLink="/about">
+        <ion-icon slot="icon-only" name="help"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary" fixed>
     <ion-row>
       <ion-col *ngFor="let button of buttons" text-center>
-        <ion-button class="toolbar-button" fill="clear" size="small" color="light" [class.selected]="button.selected" [ngClass]="button.id"
-          (click)="onButtonTouched(button)">
-          <ion-icon slot="icon-only"
-            [name]="button.icon"
-            [src]="button.icon">
+        <ion-button class="toolbar-button" fill="clear" size="small" color="light" [class.selected]="button.selected"
+          [ngClass]="button.id" (click)="onButtonTouched(button)">
+          <ion-icon slot="icon-only" [name]="button.icon" [src]="button.icon">
           </ion-icon>
         </ion-button>
       </ion-col>
@@ -32,6 +30,12 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <web-social-share (closed)="webSocialShare.onClosed()" [show]="webSocialShare.show" [share]="webSocialShare.share">
+    <ion-icon class="icon-share" name="logo-facebook" slot="facebook" color="fb"></ion-icon>
+    <ion-icon class="icon-share" name="logo-twitter" slot="twitter" color="twitter"></ion-icon>
+    <ion-icon class="icon-share" name="logo-whatsapp" slot="whatsapp" color="whatsapp"></ion-icon>
+  </web-social-share>
+
   <ion-grid fixed>
 
     <ion-row class="full-height" *ngIf="isNetworkError" align-items-center>
@@ -39,23 +43,37 @@
         <ion-icon class="icon-alert" name="alert"></ion-icon>
         <p>Network error</p>
       </ion-col>
-      
+
     </ion-row>
 
     <ion-slides *ngIf="!isNetworkError" [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()">
       <ion-slide *ngFor="let slide of slidesPost">
 
         <ion-list lines="full" *ngIf="isLoading">
-          <div padding-horizontal class="fakeItem" *ngFor="let i of fakeArray">
-            <h2></h2>
-            <h3></h3>
-          </div> 
+          <ion-item *ngFor="let i of fakeArray">
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
         </ion-list>
 
         <ion-list lines="full" *ngIf="isSlideActive(slide) && !isLoading">
           <ion-item *ngFor="let post of slide.posts" (click)="openUrl(post.url)">
             <ion-label text-wrap>
               <p class="bold link">{{ post.title }}</p>
+              <ion-button fill="clear" color="primary" size="small" text-lowercase
+                (click)="onShare(post); $event.stopPropagation()">
+                <ion-icon name="share" slot="start"></ion-icon>
+                <span>Share</span>
+              </ion-button>
             </ion-label>
           </ion-item>
         </ion-list>
