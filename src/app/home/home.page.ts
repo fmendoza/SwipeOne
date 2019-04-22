@@ -68,17 +68,17 @@ export class HomePage {
       config: [{
         facebook: {
           socialShareUrl: '',
-          socialShareText: 'via https://swipeone.app'
+          socialShareText: ''
         },
       }, {
         twitter: {
           socialShareUrl: '',
-          socialShareText: 'via https://swipeone.app'
+          socialShareText: ''
         }
       }, {
         whatsapp: {
           socialShareUrl: '',
-          socialShareText: 'via https://swipeone.app'
+          socialShareText: ''
         }
       }]
     },
@@ -146,10 +146,13 @@ export class HomePage {
     this.webSocialShare.share.config.forEach((item: any) => {
       if (item.whatsapp) {
         item.whatsapp.socialShareUrl = post.url;
+        item.whatsapp.socialShareText = post.title + ' (via swipeone.app) ';
       } else if (item.facebook) {
         item.facebook.socialShareUrl = post.url;
+        item.facebook.socialShareText = post.title + ' (via swipeone.app) ';
       } else if (item.twitter) {
         item.twitter.socialShareUrl = post.url;
+        item.twitter.socialShareText = post.title + ' (via swipeone.app) ';
       }
     });
 
