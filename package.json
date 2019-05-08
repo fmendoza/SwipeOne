@@ -60,7 +60,7 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.11.3",
-    "@types/parse": "^2.4.3",
+    "@types/parse": "^2.2.2",
     "codelyzer": "~4.4.2",
     "ionic": "^4.3.1",
     "jasmine-core": "~2.99.1",

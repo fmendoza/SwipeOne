@@ -20,6 +20,7 @@ export class AppComponent {
   async initializeApp() {
     Parse.initialize(environment.appId);
     (Parse as any).serverURL = environment.serverUrl;
+    Parse.enableLocalDatastore()
 
     this.setupDesktopAnimations();
 
