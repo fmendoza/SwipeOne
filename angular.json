@@ -14,14 +14,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "progress": false,
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              {
+            "assets": [{
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
@@ -44,24 +42,25 @@
               "src/manifest.json",
               "src/_redirects"
             ],
-            "styles": [
-              {
+            "styles": [{
                 "input": "src/theme/variables.scss"
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/app/app.scss"
               }
             ],
-            "scripts": []
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -70,7 +69,15 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
+            },
+            "ci": {
+              "progress": false
             }
           }
         },
@@ -82,6 +89,9 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
+            },
+            "ci": {
+              "progress": false
             }
           }
         },
@@ -98,12 +108,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "styles.css"
-            ],
+            "styles": [],
             "scripts": [],
-            "assets": [
-              {
+            "assets": [{
                 "glob": "favicon.ico",
                 "input": "src/",
                 "output": "/"
@@ -112,9 +119,14 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
-              },
-              "src/manifest.json"
+              }
             ]
+          },
+          "configurations": {
+            "ci": {
+              "progress": false,
+              "watch": false
+            }
           }
         },
         "lint": {
@@ -130,7 +142,7 @@
           }
         },
         "ionic-cordova-build": {
-          "builder": "@ionic/ng-toolkit:cordova-build",
+          "builder": "@ionic/angular-toolkit:cordova-build",
           "options": {
             "browserTarget": "app:build"
           },
@@ -141,7 +153,7 @@
           }
         },
         "ionic-cordova-serve": {
-          "builder": "@ionic/ng-toolkit:cordova-serve",
+          "builder": "@ionic/angular-toolkit:cordova-serve",
           "options": {
             "cordovaBuildTarget": "app:ionic-cordova-build",
             "devServerTarget": "app:serve"
@@ -164,6 +176,14 @@
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "app:serve:production"
+            },
+            "ci": {
+              "devServerTarget": "app:serve:ci"
+            }
           }
         },
         "lint": {
@@ -179,13 +199,13 @@
     }
   },
   "cli": {
-    "defaultCollection": "@ionic/schematics-angular"
+    "defaultCollection": "@ionic/angular-toolkit"
   },
   "schematics": {
-    "@ionic/schematics-angular:component": {
+    "@ionic/angular-toolkit:component": {
       "styleext": "scss"
     },
-    "@ionic/schematics-angular:page": {
+    "@ionic/angular-toolkit:page": {
       "styleext": "scss"
     }
   }
