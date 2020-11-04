@@ -23,7 +23,7 @@ ionic serve
 
 ## Built With
 
-* [Ionic 4](https://beta.ionicframework.com/docs/)
+* [Ionic 5](https://ionicframework.com/)
 
 ## Authors
 
