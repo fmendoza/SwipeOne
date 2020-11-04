@@ -1,4 +1,4 @@
-import { Component, ViewChild, HostListener } from '@angular/core';
+import { Component, ViewChild, HostListener, ɵConsole } from '@angular/core';
 import { Platform, IonSlides, IonContent, ToastController } from '@ionic/angular';
 import { ThemeService } from '../theme.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -26,8 +26,8 @@ export enum KEY_CODE {
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
 
 export class HomePage {
