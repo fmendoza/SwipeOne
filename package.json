@@ -13,14 +13,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^9.1.12",
-    "@angular/core": "^9.1.12",
-    "@angular/forms": "^9.1.12",
-    "@angular/platform-browser": "^9.1.12",
-    "@angular/platform-browser-dynamic": "^9.1.12",
+    "@angular/common": "^10.2.2",
+    "@angular/core": "^10.2.2",
+    "@angular/forms": "^10.2.2",
+    "@angular/platform-browser": "^10.2.2",
+    "@angular/platform-browser-dynamic": "^10.2.2",
     "@angular/pwa": "^0.11.4",
-    "@angular/router": "^9.1.12",
-    "@angular/service-worker": "^9.1.12",
+    "@angular/router": "^10.2.2",
+    "@angular/service-worker": "^10.2.2",
     "@ionic-native/browser-tab": "^5.29.0",
     "@ionic-native/core": "^5.29.0",
     "@ionic-native/in-app-browser": "^5.29.0",
@@ -36,11 +36,11 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.901.12",
-    "@angular/cli": "~9.1.12",
-    "@angular/compiler": "~9.1.12",
-    "@angular/compiler-cli": "~9.1.12",
-    "@angular/language-service": "~9.1.12",
+    "@angular-devkit/build-angular": "~0.1002.0",
+    "@angular/cli": "~10.2.0",
+    "@angular/compiler": "~10.2.2",
+    "@angular/compiler-cli": "~10.2.2",
+    "@angular/language-service": "~10.2.2",
     "@ionic/angular-toolkit": "^2.3.3",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
@@ -57,7 +57,7 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.8.3"
+    "typescript": "~4.0.5"
   },
   "description": ""
 }
