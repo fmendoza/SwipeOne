@@ -32,7 +32,7 @@ export enum KEY_CODE {
 
 export class HomePage {
 
-  @ViewChild(IonSlides, { static: false }) slides: IonSlides
+  @ViewChild(IonSlides) slides: IonSlides
   @ViewChild(IonContent, { static: true }) content: IonContent
 
   @HostListener('window:keyup', ['$event']) keyEvent(event: KeyboardEvent) {
