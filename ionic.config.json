@@ -1,7 +1,5 @@
 {
   "name": "OneClone",
-  "integrations": {
-    "cordova": {}
-  },
+  "integrations": {},
   "type": "angular"
 }
