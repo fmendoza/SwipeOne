@@ -1,4 +1,4 @@
-<ion-header no-border>
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary" fixed>
     <ion-title>
       {{ selectedButton?.title }}
@@ -13,7 +13,7 @@
   </ion-toolbar>
   <ion-toolbar color="primary" fixed>
     <ion-row>
-      <ion-col *ngFor="let button of buttons" text-center>
+      <ion-col *ngFor="let button of buttons" class="ion-text-center">
         <ion-button class="toolbar-button" fill="clear" size="small" color="light" [class.selected]="button.selected"
           [ngClass]="button.id" (click)="onButtonTouched(button)">
           <ion-icon slot="icon-only" [name]="button.icon" [src]="button.icon">
@@ -38,7 +38,7 @@
 
   <ion-grid fixed>
 
-    <ion-row class="full-height" *ngIf="isNetworkError" align-items-center>
+    <ion-row class="full-height ion-align-items-center" *ngIf="isNetworkError">
       <ion-col text-center>
         <ion-icon class="icon-alert" name="alert"></ion-icon>
         <p>Network error</p>
@@ -67,14 +67,14 @@
 
         <ion-list lines="full" *ngIf="isSlideActive(slide) && !isLoading">
           <ion-item *ngFor="let post of slide.posts" (click)="openUrl(post.url)">
-            <ion-label text-wrap>
+            <ion-label class="ion-text-wrap">
               <p class="bold link">{{ post.title }}</p>
-              <ion-button fill="clear" color="primary" size="small" text-lowercase
+              <ion-button fill="clear" color="primary" size="small" class="ion-text-lowercase"
                 (click)="onShare(post); $event.stopPropagation()">
                 <ion-icon name="share" slot="start"></ion-icon>
                 <span>Share</span>
               </ion-button>
-              <ion-button fill="clear" size="small" text-lowercase
+              <ion-button fill="clear" size="small" class="ion-text-lowercase"
                 (click)="onCopyButtonTouched(post); $event.stopPropagation()">
                 <span>Copy link</span>
               </ion-button>
