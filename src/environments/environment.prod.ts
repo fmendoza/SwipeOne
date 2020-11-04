@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  serverUrl: 'https://news.quanlabs.com/parse',
+  serverUrl: 'https://swipeone.quanlabs.com/api',
   appId: 'eztas51keC'
 };
