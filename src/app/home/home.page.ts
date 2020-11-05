@@ -1,4 +1,4 @@
-import { Component, ViewChild, HostListener, ɵConsole } from '@angular/core';
+import { Component, ViewChild, HostListener } from '@angular/core';
 import { Platform, IonSlides, IonContent, ToastController } from '@ionic/angular';
 import { ThemeService } from '../theme.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -19,9 +19,16 @@ interface SlidePost {
   posts: Post[]
 }
 
-export enum KEY_CODE {
-  RIGHT_ARROW = 39,
-  LEFT_ARROW = 37
+enum KEY_CODE {
+  RIGHT_ARROW = 'ArrowRight',
+  LEFT_ARROW = 'ArrowLeft',
+}
+
+enum StateView {
+  Loading,
+  ErrorNetwork,
+  EmptyData,
+  Content
 }
 
 @Component({
@@ -39,12 +46,10 @@ export class HomePage {
 
     if (!this.slides) return;
 
-    if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
-      this.slides.slideNext()
-    }
-
-    if (event.keyCode === KEY_CODE.LEFT_ARROW) {
-      this.slides.slidePrev()
+    if (event.key === KEY_CODE.RIGHT_ARROW) {
+      this.slides.slideNext();
+    } else if (event.key === KEY_CODE.LEFT_ARROW) {
+      this.slides.slidePrev();
     }
   }
 
@@ -53,8 +58,9 @@ export class HomePage {
   public slidesPost: SlidePost[] = []
   public posts: Post[] = []
   public fakeArray: number[] = []
-  public isNetworkError: boolean = false
-  public isLoading: boolean
+
+  public StateView = StateView
+  public currentState: StateView;
 
   public slideOpts = {
     autoHeight: false,
@@ -111,17 +117,25 @@ export class HomePage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  setCurrentState(state: StateView) {
+    this.currentState = state;
+  }
+
+  getCurrentState(): StateView {
+    return this.currentState;
+  }
+
   async loadPosts(refresher = null) {
 
     try {
 
-      this.isNetworkError = false
+      let cache = refresher === null
 
       if (refresher === null) {
-        this.isLoading = true
+        this.setCurrentState(StateView.Loading);
       }
 
-      this.posts = await this.postService.loadAll()
+      this.posts = await this.postService.loadAll(cache)
 
       for (const slide of this.slidesPost) {
         slide.posts = this.posts.filter(post => slide.id === post.source)
@@ -130,12 +144,16 @@ export class HomePage {
       const index = this.buttons.indexOf(this.getActiveButton())
       if (this.slides) this.slides.slideTo(index, 0)
 
-      this.isNetworkError = false
-
+      if (this.posts.length) {
+        this.setCurrentState(StateView.Content)
+      } else {
+        this.setCurrentState(StateView.EmptyData)
+      }
+     
       this.onRefreshComplete(refresher)
 
     } catch (error) {
-      this.isNetworkError = true
+      this.setCurrentState(StateView.ErrorNetwork);
       this.onRefreshComplete(refresher)
     }
 
@@ -222,9 +240,8 @@ export class HomePage {
     return this.selectedButton.id === slide.id
   }
 
-  onRefreshComplete(event) {
+  onRefreshComplete(event: any) {
     if (event) event.target.complete()
-    this.isLoading = false
   }
 
   createFakeArray() {
@@ -316,6 +333,5 @@ export class HomePage {
     }
 
   }
-
 
 }

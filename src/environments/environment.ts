@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  serverUrl: 'https://swipeone.quanlabs.com/api',
-  appId: 'eztas51keC'
+  serverUrl: 'http://locahost:1337/api',
+  appId: 'myAppId'
 };

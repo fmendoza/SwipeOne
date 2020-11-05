@@ -31,16 +31,12 @@
                 "output": "./svg"
               },
               {
-                "glob": "websocialshare.js",
-                "input": "node_modules/web-social-share/dist",
-                "output": "./"
-              },
-              {
                 "glob": "websocialshare/*",
                 "input": "node_modules/web-social-share/dist",
                 "output": "./"
               },
-              "src/_redirects"
+              "src/_redirects",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               {
@@ -48,6 +44,9 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/app/app.scss"
               }
             ],
             "scripts": []

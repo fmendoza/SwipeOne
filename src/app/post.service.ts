@@ -10,19 +10,29 @@ export class Post extends Parse.Object {
     super('Post');
   }
 
-  async loadAll() {
-    const query = new Parse.Query(Post)
-    query.fromLocalDatastore()
-    const local = await query.find()
+  async loadAll(cache: boolean = true): Promise<Post[]> {
 
-    if (local.length) return local
+    let query = new Parse.Query(Post)
+    query.ascending('title')
+    let results = []
 
-    const query1 = new Parse.Query(Post)
-    const remote = await query1.find()
+    if (cache) {
+      query.fromLocalDatastore()
+      results = await query.find()
+    }
 
-    Parse.Object.pinAll(remote)
+    if (!cache || !results.length) {
 
-    return remote
+      query.fromNetwork()
+      results = await query.find()
+
+      if (results.length) {
+        await Parse.Object.unPinAllObjects()
+        await Parse.Object.pinAll(results)
+      }
+    }
+
+    return results
   }
 
   get title(): string {

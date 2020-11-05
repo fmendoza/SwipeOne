@@ -3,13 +3,6 @@
     <ion-title>
       {{ selectedButton?.title }}
     </ion-title>
-    <ion-buttons slot="end">
-      <p class="bold text-small">Dark Mode</p>
-      <ion-toggle mode="md" color="dark" (ionChange)="onChangeToggle($event)"></ion-toggle>
-      <ion-button routerLink="/about">
-        <ion-icon slot="icon-only" name="help"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary" fixed>
     <ion-row>
@@ -38,18 +31,24 @@
 
   <ion-grid fixed>
 
-    <ion-row class="full-height ion-align-items-center" *ngIf="isNetworkError">
+    <ion-row class="full-height ion-align-items-center" *ngIf="currentState === StateView.ErrorNetwork">
       <ion-col class="ion-text-center">
-        <ion-icon class="icon-alert" name="alert"></ion-icon>
+        <ion-icon class="icon-alert" name="alert-circle-outline"></ion-icon>
         <p>Network error</p>
       </ion-col>
-
     </ion-row>
 
-    <ion-slides *ngIf="!isNetworkError" [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()">
+    <ion-row class="full-height ion-align-items-center" *ngIf="currentState === StateView.EmptyData">
+      <ion-col class="ion-text-center">
+        <ion-icon class="icon-alert" name="alert-circle-outline"></ion-icon>
+        <p>No data found</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-slides [options]="slideOpts" (ionSlideDidChange)="onSlideDidChange()">
       <ion-slide *ngFor="let slide of slidesPost">
 
-        <ion-list lines="full" *ngIf="isLoading">
+        <ion-list lines="full" *ngIf="currentState === StateView.Loading">
           <ion-item *ngFor="let i of fakeArray">
             <ion-label>
               <h3>
@@ -65,7 +64,7 @@
           </ion-item>
         </ion-list>
 
-        <ion-list lines="full" *ngIf="isSlideActive(slide) && !isLoading">
+        <ion-list lines="full" *ngIf="isSlideActive(slide) && currentState === StateView.Content">
           <ion-item *ngFor="let post of slide.posts" (click)="openUrl(post.url)">
             <ion-label class="ion-text-wrap">
               <p class="bold link">{{ post.title }}</p>
