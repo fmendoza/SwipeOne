@@ -33,15 +33,15 @@
 
     <ion-row class="full-height ion-align-items-center" *ngIf="currentState === StateView.ErrorNetwork">
       <ion-col class="ion-text-center">
-        <ion-icon class="icon-alert" name="alert-circle-outline"></ion-icon>
-        <p>Network error</p>
+        <ion-icon class="icon-alert opacity-medium" name="alert-circle-outline"></ion-icon>
+        <p class="opacity-medium">Network error</p>
       </ion-col>
     </ion-row>
 
     <ion-row class="full-height ion-align-items-center" *ngIf="currentState === StateView.EmptyData">
       <ion-col class="ion-text-center">
-        <ion-icon class="icon-alert" name="alert-circle-outline"></ion-icon>
-        <p>No data found</p>
+        <ion-icon class="icon-alert opacity-medium" name="alert-circle-outline"></ion-icon>
+        <p class="opacity-medium">No data found</p>
       </ion-col>
     </ion-row>
 
@@ -67,7 +67,7 @@
         <ion-list lines="full" *ngIf="isSlideActive(slide) && currentState === StateView.Content">
           <ion-item *ngFor="let post of slide.posts" (click)="openUrl(post.url)">
             <ion-label class="ion-text-wrap">
-              <p class="bold link">{{ post.title }}</p>
+              <p class="bold link opacity-high">{{ post.title }}</p>
               <ion-button fill="clear" color="primary" size="small" class="ion-text-lowercase"
                 (click)="onShare(post); $event.stopPropagation()">
                 <ion-icon name="share" slot="start"></ion-icon>

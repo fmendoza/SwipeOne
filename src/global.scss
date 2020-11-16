@@ -11,35 +11,47 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 ion-header ion-toolbar {
-    margin: auto;
+  margin: auto;
 }
 
 @media (min-width: 760px) {
-    ion-header ion-toolbar[fixed] {
-        margin: 0;
-        --padding-end: calc((100% - var(--ion-grid-width-xl)) / 2);
-        --padding-start: calc((100% - var(--ion-grid-width-xl)) / 2);
-    }
+  ion-header ion-toolbar[fixed] {
+    margin: 0;
+    --padding-end: calc((100% - var(--ion-grid-width-xl)) / 2);
+    --padding-start: calc((100% - var(--ion-grid-width-xl)) / 2);
+  }
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .justify-content-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .custom-link {
-    cursor: pointer;
-    text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .plt-desktop .link:hover {
-    cursor: pointer;
-    text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.opacity-high {
+  opacity: .87;
+}
+
+.opacity-medium {
+  opacity: .60;
+}
+
+.opacity-low {
+  opacity: .38;
 }

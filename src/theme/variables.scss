@@ -2,8 +2,8 @@
 
   --ion-background-color: #fff;
   --ion-border-color: #d8d8d8;
-  --ion-text-color-step-400: #222;
-  --ion-text-color-step-600: #222;
+  --ion-color-step-400: #222;
+  --ion-color-step-600: #222;
 
   /** primary **/
   --ion-color-primary: #3880ff;
@@ -113,12 +113,19 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --ion-background-color: #171717;
-    --ion-item-background-color: #171717;
+    --ion-background-color: #121212;
+    --ion-item-background-color: #121212;
     --ion-item-border-color: #444;
-    --ion-text-color: #666;
-    --ion-text-color-rgb: 136, 136, 136;
-    --ion-text-color-step-400: #666;
-    --ion-text-color-step-600: #666;
+    --ion-border-color: #444;
+    --ion-color: #fff;
+    --ion-color-rgb: 255, 255, 255;
+    --ion-color-step-400: #fff;
+    --ion-color-step-600: #fff;
+
+    ion-content {
+      p, ion-icon {
+        color: var(--ion-color);
+      }
+    }
   }
 }

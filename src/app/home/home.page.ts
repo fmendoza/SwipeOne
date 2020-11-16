@@ -185,19 +185,6 @@ export class HomePage {
 
   async onShare(post: Post) {
 
-    this.webSocialShare.share.config.forEach((item: any) => {
-      if (item.whatsapp) {
-        item.whatsapp.socialShareUrl = post.url;
-        item.whatsapp.socialShareText = post.title + ' (via swipeone.app) ';
-      } else if (item.facebook) {
-        item.facebook.socialShareUrl = post.url;
-        item.facebook.socialShareText = post.title + ' (via swipeone.app) ';
-      } else if (item.twitter) {
-        item.twitter.socialShareUrl = post.url;
-        item.twitter.socialShareText = post.title + ' (via swipeone.app) ';
-      }
-    });
-
     if (this.platform.is('hybrid')) {
 
       try {
@@ -206,7 +193,29 @@ export class HomePage {
         console.warn(err)
       }
 
+    } else if (navigator.share) {
+      
+      navigator.share({
+        title: post.title,
+        text: '',
+        url: post.url,
+      })
+
     } else {
+
+      this.webSocialShare.share.config.forEach((item: any) => {
+        if (item.whatsapp) {
+          item.whatsapp.socialShareUrl = post.url;
+          item.whatsapp.socialShareText = post.title + ' (via swipeone.app) ';
+        } else if (item.facebook) {
+          item.facebook.socialShareUrl = post.url;
+          item.facebook.socialShareText = post.title + ' (via swipeone.app) ';
+        } else if (item.twitter) {
+          item.twitter.socialShareUrl = post.url;
+          item.twitter.socialShareText = post.title + ' (via swipeone.app) ';
+        }
+      });
+
       this.webSocialShare.show = true;
     }
 
