@@ -17,17 +17,20 @@ export class Post extends Parse.Object {
     let results = []
 
     if (cache) {
-      query.fromLocalDatastore()
-      results = await query.find()
+
+      results = await query
+        .fromLocalDatastore()
+        .find()
     }
 
     if (!cache || !results.length) {
 
-      query.fromNetwork()
-      results = await query.find()
+      results = await query
+        .fromNetwork()
+        .find()
 
       if (results.length) {
-        await Parse.Object.unPinAllObjects()
+        await (Parse as any).LocalDatastore._clear()
         await Parse.Object.pinAll(results)
       }
     }
