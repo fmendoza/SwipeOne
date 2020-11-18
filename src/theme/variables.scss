@@ -2,6 +2,8 @@
 
   --ion-background-color: #fff;
   --ion-border-color: #d8d8d8;
+  --ion-color: #222;
+  --ion-color-rgb: 0, 0, 0;
   --ion-color-step-400: #222;
   --ion-color-step-600: #222;
 
@@ -104,8 +106,15 @@
     --ion-color-tint: #25D366;
   }
 
+  ion-content {
+    p, ion-icon {
+      color: var(--ion-color);
+    }
+  }
+
   ion-toast {
-    --color: #ffffff;
+    --background: var(--ion-color);
+    --color: var(--ion-background-color);
   }
 
   --ion-grid-width-xl: 760px;
@@ -121,11 +130,5 @@
     --ion-color-rgb: 255, 255, 255;
     --ion-color-step-400: #fff;
     --ion-color-step-600: #fff;
-
-    ion-content {
-      p, ion-icon {
-        color: var(--ion-color);
-      }
-    }
   }
 }
